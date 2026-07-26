@@ -27,12 +27,55 @@
   --ink: oklch(0.115 0.014 266);
   --ink-soft: oklch(0.19 0.016 266);
   --paper: oklch(0.985 0.002 264);
+  --prose: oklch(0.36 0.015 264);
   --blue: oklch(0.555 0.24 271);
-  --blue-deep: oklch(0.42 0.22 271);
+  /* Accent used as text on --paper; must stay contrast-safe in both themes. */
+  --blue-ink: oklch(0.42 0.22 271);
+  /* Fill/border for the pressed and hovered states of the primary button. */
+  --blue-hover: oklch(0.42 0.22 271);
   --line: oklch(0.87 0.008 264);
-  --line-dark: oklch(0.31 0.014 266);
+  --line-strong: oklch(0.48 0.014 264);
+  --surface-hover: oklch(0.965 0.005 264);
+  --grid-line: oklch(0.42 0.03 271 / 0.045);
+  --shadow-app: 0 28px 64px oklch(0.16 0.02 264 / 0.14);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --radius: 0rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.165 0.008 266);
+    --foreground: oklch(0.965 0.003 264);
+    --card: oklch(0.205 0.01 266);
+    --card-foreground: oklch(0.965 0.003 264);
+    --popover: oklch(0.205 0.01 266);
+    --popover-foreground: oklch(0.965 0.003 264);
+    --primary: oklch(0.6 0.22 271);
+    --primary-foreground: oklch(0.99 0.002 264);
+    --secondary: oklch(0.245 0.012 266);
+    --secondary-foreground: oklch(0.965 0.003 264);
+    --muted: oklch(0.245 0.012 266);
+    --muted-foreground: oklch(0.71 0.012 264);
+    --accent: oklch(0.28 0.04 271);
+    --accent-foreground: oklch(0.93 0.03 271);
+    --destructive: oklch(0.64 0.2 28);
+    --destructive-foreground: oklch(0.15 0 0);
+    --border: oklch(0.29 0.012 266);
+    --input: oklch(0.29 0.012 266);
+    --ring: oklch(0.7 0.17 271);
+    --ink: oklch(0.965 0.003 264);
+    --ink-soft: oklch(0.88 0.006 264);
+    --paper: oklch(0.165 0.008 266);
+    --prose: oklch(0.79 0.01 264);
+    --blue: oklch(0.6 0.22 271);
+    --blue-ink: oklch(0.79 0.13 271);
+    --blue-hover: oklch(0.68 0.19 271);
+    --line: oklch(0.29 0.012 266);
+    --line-strong: oklch(0.46 0.014 266);
+    --surface-hover: oklch(0.235 0.012 266);
+    --grid-line: oklch(0.85 0.04 271 / 0.05);
+    --shadow-app: 0 28px 64px oklch(0 0 0 / 0.5);
+  }
 }
 
 @theme inline {
@@ -72,12 +115,16 @@
 
   html {
     scroll-behavior: smooth;
+    color-scheme: light dark;
   }
 
   body {
     @apply bg-background text-foreground;
     margin: 0;
-    font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+    font-family:
+      "Segoe UI Variable", "Segoe UI", system-ui, "Microsoft YaHei UI",
+      "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC",
+      sans-serif;
     font-synthesis: none;
   }
 
@@ -91,16 +138,74 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+
   ::selection {
     color: oklch(0.99 0 0);
     background: var(--blue);
   }
 }
 
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  color: var(--primary-foreground);
+  background: var(--blue);
+  font-size: 0.85rem;
+  font-weight: 680;
+  transform: translateY(-120%);
+  transition: transform 160ms var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  outline-offset: -4px;
+  transform: translateY(0);
+}
+
 .site-shell {
   min-width: 320px;
   overflow: clip;
   background: var(--paper);
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+  font-weight: 620;
+}
+
+.lang-option {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  transition: color 180ms var(--ease-out);
+}
+
+.lang-option.is-current {
+  color: var(--foreground);
+}
+
+.lang-option + .lang-option {
+  position: relative;
+  margin-inline-start: 9px;
+  padding-inline-start: 10px;
+}
+
+.lang-option + .lang-option::before {
+  position: absolute;
+  inset-block: 32%;
+  inset-inline-start: 0;
+  width: 1px;
+  content: "";
+  background: var(--line);
 }
 
 .site-header {
@@ -212,7 +317,7 @@
 .button-primary {
   color: var(--primary-foreground);
   background: var(--blue);
-  border-color: var(--blue-deep);
+  border-color: var(--blue-hover);
 }
 
 .button-secondary {
@@ -237,8 +342,8 @@
   z-index: -1;
   content: "";
   background-image:
-    linear-gradient(to right, oklch(0.42 0.03 271 / 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.42 0.03 271 / 0.04) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(to bottom, black, transparent 72%);
 }
@@ -252,7 +357,7 @@
   align-items: center;
   gap: 10px;
   margin: 0 0 28px;
-  color: var(--blue-deep);
+  color: var(--blue-ink);
   font-size: 0.75rem;
   font-weight: 720;
   letter-spacing: 0.08em;
@@ -282,7 +387,7 @@
 .hero-intro > p:first-child {
   max-width: 42ch;
   margin: 0;
-  color: oklch(0.36 0.015 264);
+  color: var(--prose);
   font-size: 1.08rem;
   line-height: 1.65;
   text-wrap: pretty;
@@ -314,8 +419,8 @@
   content: "";
   pointer-events: none;
   background-image:
-    linear-gradient(to right, oklch(0.42 0.03 271 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.42 0.03 271 / 0.045) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
@@ -326,10 +431,30 @@
   padding-block: 18px clamp(56px, 7vw, 88px);
 }
 
+/* Shared chrome for every product screenshot so the three sections match. */
 .app-frame {
   overflow: hidden;
-  background: transparent;
-  box-shadow: 0 28px 64px oklch(0.16 0.02 264 / 0.14);
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-app);
+}
+
+/*
+ * The only rounded corners on the site: the screenshots themselves have
+ * rounded window chrome, so a square frame would leave a sliver at each
+ * corner and break the border. The radius tracks each frame's display size
+ * rather than being uniform, so the curve reads the same at all three scales.
+ */
+.product-stage .app-frame {
+  border-radius: 10px;
+}
+
+.capability-visual {
+  border-radius: 8px;
+}
+
+.terminal-specimen {
+  border-radius: 6px;
 }
 
 .app-screenshot,
@@ -363,7 +488,7 @@
   flex: none;
   width: 23px;
   height: 23px;
-  color: var(--blue);
+  color: var(--blue-ink);
   stroke-width: 1.5;
 }
 
@@ -392,18 +517,23 @@
 
 .section-heading {
   display: grid;
-  grid-template-columns: 0.72fr 1.28fr;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
   align-items: end;
-  gap: 56px;
+  gap: 48px;
+  padding-top: 30px;
   margin-bottom: 74px;
+  border-top: 1px solid var(--line);
 }
 
 .section-heading p,
-.faq-heading p {
+.faq-heading p,
+.workflow-kicker {
   margin: 0 0 8px;
-  color: var(--blue-deep);
-  font-size: 0.82rem;
+  color: var(--blue-ink);
+  font-size: 0.8rem;
   font-weight: 680;
+  line-height: 1.5;
+  text-wrap: pretty;
 }
 
 .section-heading h2,
@@ -443,7 +573,7 @@
 .capability > svg {
   width: 25px;
   height: 25px;
-  color: var(--blue);
+  color: var(--blue-ink);
   stroke-width: 1.45;
 }
 
@@ -475,10 +605,7 @@
 }
 
 .workflow-kicker {
-  margin: 0 0 28px;
-  color: var(--blue-deep);
-  font-size: 0.76rem;
-  font-weight: 700;
+  margin-bottom: 28px;
 }
 
 .workflow-copy h2 {
@@ -515,7 +642,7 @@
 .workflow-copy li svg {
   width: 16px;
   height: 16px;
-  color: var(--blue);
+  color: var(--blue-ink);
 }
 
 .terminal-specimen {
@@ -547,7 +674,7 @@
 }
 
 .stack-list span {
-  color: oklch(0.3 0.015 264);
+  color: var(--ink-soft);
   font-size: clamp(0.9rem, 1.4vw, 1.05rem);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -584,7 +711,7 @@
 }
 
 .faq-list [data-slot="accordion-trigger"]:hover {
-  color: var(--blue-deep);
+  color: var(--blue-ink);
   text-decoration: none;
 }
 
@@ -645,6 +772,10 @@
   font-size: clamp(3rem, 5.7vw, 5.5rem);
 }
 
+.download-section :focus-visible {
+  outline-color: oklch(0.99 0 0);
+}
+
 .download-actions {
   display: flex;
   flex-direction: column;
@@ -652,8 +783,9 @@
   gap: 17px;
 }
 
+/* Sits on the blue band in both themes, so the ink stays a fixed dark value. */
 .button-on-blue {
-  color: var(--ink);
+  color: oklch(0.145 0.012 266);
   background: oklch(0.99 0 0);
 }
 
@@ -679,12 +811,202 @@
 
 .site-footer > div {
   display: flex;
+  /* The language switcher carries a 44px touch target, so the default
+     `stretch` would top-align the plain text links beside it. */
+  align-items: center;
   justify-content: flex-end;
   gap: 25px;
 }
 
 .site-footer .brand {
   color: var(--foreground);
+}
+
+/* ==========================================================================
+ * Chinese typography
+ *
+ * The Latin scale does not transfer. Three things break, and each needs a
+ * different fix:
+ *
+ * 1. Weight. Segoe UI Variable renders the full 600–760 range used above, but
+ *    Microsoft YaHei ships only 400 and 700 — with font-synthesis disabled,
+ *    every one of those steps snaps to 700 and the hierarchy flattens into a
+ *    single slab of bold. So Chinese gets an explicit two-weight system:
+ *    400 for anything incidental, 700 only where bold is the intent.
+ * 2. Size. Han glyphs pack many more strokes into the same em, so the small
+ *    end of the scale (11–13px) goes muddy. Nothing drops below ~13px here.
+ * 3. Rhythm. Negative tracking and sub-1.5 leading crowd Han characters, and
+ *    `ch` (the width of "0") is the wrong measure unit — 1em is one character.
+ * ========================================================================== */
+
+/* --- Weight: collapse to the two the system fonts actually have ---------- */
+
+:lang(zh) .site-nav,
+:lang(zh) .lang-switch,
+:lang(zh) .stack-section > p,
+:lang(zh) .site-footer {
+  font-weight: 400;
+}
+
+:lang(zh) .lang-option.is-current,
+:lang(zh) .button,
+:lang(zh) .release-note,
+:lang(zh) .section-heading p,
+:lang(zh) .faq-heading p,
+:lang(zh) .workflow-kicker,
+:lang(zh) .capability h3,
+:lang(zh) .faq-list [data-slot="accordion-trigger"],
+:lang(zh) .download-section > div:first-child p,
+:lang(zh) .hero h1,
+:lang(zh) .section-heading h2,
+:lang(zh) .workflow-copy h2,
+:lang(zh) .faq-heading h2,
+:lang(zh) .download-section h2 {
+  font-weight: 700;
+}
+
+/* --- Tracking: Han needs none of the Latin tightening -------------------- */
+
+:lang(zh) .hero h1,
+:lang(zh) .section-heading h2,
+:lang(zh) .workflow-copy h2,
+:lang(zh) .faq-heading h2,
+:lang(zh) .download-section h2,
+:lang(zh) .capability h3,
+:lang(zh) .principle strong,
+:lang(zh) .stack-list span {
+  letter-spacing: 0;
+}
+
+:lang(zh) .release-note {
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+:lang(zh) .section-heading p,
+:lang(zh) .faq-heading p,
+:lang(zh) .workflow-kicker,
+:lang(zh) .download-section > div:first-child p {
+  letter-spacing: 0.02em;
+}
+
+/* --- Display sizes: keep the longest line inside its column -------------- */
+
+/*
+ * Chinese says the same thing in far fewer characters, so the English size
+ * leaves the headline visually light. The vw term is bound by the narrowest
+ * two-column width (~1000px), where the hero column is at its tightest
+ * relative to the viewport — not by the widest.
+ */
+:lang(zh) .hero h1 {
+  font-size: clamp(2.2rem, 6.8vw, 5.8rem);
+  line-height: 1.16;
+}
+
+/* Bound by ~1000px, where this heading's column is narrowest against the
+ * viewport: the three-column split is still active but the container has
+ * stopped growing. */
+:lang(zh) .download-section h2 {
+  font-size: clamp(2.1rem, 6vw, 4.8rem);
+}
+
+:lang(zh) .section-heading h2,
+:lang(zh) .workflow-copy h2,
+:lang(zh) .faq-heading h2,
+:lang(zh) .download-section h2 {
+  line-height: 1.22;
+}
+
+/* --- Text sizes: raise the small end off the Latin floor ----------------- */
+
+:lang(zh) .site-nav {
+  font-size: 0.9rem;
+}
+
+:lang(zh) .lang-switch,
+:lang(zh) .header-github {
+  font-size: 0.875rem;
+}
+
+:lang(zh) .button {
+  font-size: 0.92rem;
+}
+
+:lang(zh) .release-note,
+:lang(zh) .hero-meta,
+:lang(zh) .site-footer {
+  font-size: 0.85rem;
+}
+
+:lang(zh) .principle strong {
+  font-size: 1.02rem;
+}
+
+:lang(zh) .principle span {
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+:lang(zh) .principle div {
+  gap: 10px;
+}
+
+:lang(zh) .section-heading p,
+:lang(zh) .faq-heading p,
+:lang(zh) .workflow-kicker {
+  font-size: 0.9rem;
+}
+
+:lang(zh) .capability h3 {
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+}
+
+:lang(zh) .stack-section > p,
+:lang(zh) .download-section > div:first-child p {
+  font-size: 0.88rem;
+}
+
+:lang(zh) .download-actions span {
+  font-size: 0.82rem;
+}
+
+:lang(zh) .workflow-copy li {
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+:lang(zh) .workflow-copy ul {
+  gap: 17px;
+}
+
+:lang(zh) .faq-list [data-slot="accordion-trigger"] {
+  font-size: 1.02rem;
+}
+
+/* --- Measure and leading for running text -------------------------------- */
+
+:lang(zh) .hero-intro > p:first-child {
+  max-width: 26em;
+  line-height: 1.85;
+}
+
+:lang(zh) .capability p {
+  max-width: 28em;
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+:lang(zh) .workflow-copy > p:not(.workflow-kicker) {
+  max-width: 30em;
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+
+:lang(zh) .faq-list [data-slot="accordion-content"] {
+  max-width: 34em;
+  font-size: 0.95rem;
+  line-height: 1.85;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -695,12 +1017,12 @@
   }
 
   .button-primary:hover {
-    background: var(--blue-deep);
+    background: var(--blue-hover);
   }
 
   .button-secondary:hover {
-    border-color: oklch(0.48 0.014 264);
-    background: oklch(0.965 0.005 264);
+    border-color: var(--line-strong);
+    background: var(--surface-hover);
   }
 
   .button-on-blue:hover {
@@ -709,12 +1031,27 @@
 }
 
 @media (max-width: 980px) {
+  /* Keep primary navigation reachable instead of dropping it below 980px. */
   .site-header {
     grid-template-columns: 1fr auto;
+    min-height: 0;
+    padding-block: 16px 0;
   }
 
-  .site-nav {
-    display: none;
+  .site-header > .brand {
+    grid-area: 1 / 1;
+  }
+
+  .site-header > .header-actions {
+    grid-area: 1 / 2;
+  }
+
+  .site-header > .site-nav {
+    grid-area: 2 / 1 / 3 / -1;
+    gap: 26px;
+    margin-top: 16px;
+    padding-block: 13px;
+    border-top: 1px solid var(--line);
   }
 
   .hero {
@@ -802,8 +1139,14 @@
     width: min(100% - 32px, 1320px);
   }
 
-  .site-header {
-    min-height: 70px;
+  .site-nav {
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .header-actions {
+    gap: 14px;
   }
 
   .header-github {
@@ -917,18 +1260,18 @@
     margin-top: 20px;
   }
 
+  /* Stack the footer instead of hiding its tagline and links. */
   .site-footer {
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-    padding-block: 30px;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 16px;
+    padding-block: 32px;
   }
 
-  .site-footer p {
-    display: none;
-  }
-
-  .site-footer > div a {
-    display: none;
+  .site-footer > div {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 }
 
@@ -940,6 +1283,7 @@
   .button,
   .site-nav a,
   .header-github,
+  .skip-link,
   .site-footer a {
     transition-duration: 0.01ms;
   }
