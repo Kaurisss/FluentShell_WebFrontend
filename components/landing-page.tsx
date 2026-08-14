@@ -20,6 +20,7 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
 import { GITHUB_URL } from "@/lib/site";
+import { Reveal, StaggerGroup, StaggerItem, FloatUp } from "@/components/animate";
 
 const stack = ["WinUI 3", "Windows App SDK", "SSH.NET", "Syncfusion DataGrid"];
 
@@ -80,38 +81,37 @@ export function LandingPage({
       </header>
 
       <main id="main">
-        <section className="hero section-grid" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="release-note">
-              <span aria-hidden="true" />
-              {dict.hero.releaseNote}
-            </p>
-            <h1 id="hero-title">
-              {dict.hero.titleLine1}
-              <br />
-              {dict.hero.titleLine2}
-            </h1>
-          </div>
-
-          <div className="hero-intro">
-            <p>{dict.hero.intro}</p>
-            <div className="hero-actions">
-              <a href="#download" className="button button-primary">
-                <IconBrandWindows aria-hidden="true" />
-                {dict.hero.ctaDownload}
-              </a>
-              <a
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="button button-secondary"
-              >
-                <IconBrandGithub aria-hidden="true" />
-                {dict.hero.ctaSource}
-              </a>
-            </div>
-            <p className="hero-meta">{dict.hero.meta}</p>
-          </div>
+        <section className="hero" aria-labelledby="hero-title">
+          <Reveal as="p" className="release-note">
+            <span aria-hidden="true" />
+            {dict.hero.releaseNote}
+          </Reveal>
+          <Reveal as="h1" id="hero-title" delay={0.08}>
+            {dict.hero.titleLine1}
+            <br />
+            {dict.hero.titleLine2}
+          </Reveal>
+          <Reveal as="p" className="hero-intro" delay={0.16}>
+            {dict.hero.intro}
+          </Reveal>
+          <Reveal className="hero-actions" delay={0.24}>
+            <a href="#download" className="button button-primary">
+              <IconBrandWindows aria-hidden="true" />
+              {dict.hero.ctaDownload}
+            </a>
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="button button-secondary"
+            >
+              <IconBrandGithub aria-hidden="true" />
+              {dict.hero.ctaSource}
+            </a>
+          </Reveal>
+          <Reveal as="p" className="hero-meta" delay={0.32}>
+            {dict.hero.meta}
+          </Reveal>
         </section>
 
         <section
@@ -120,7 +120,7 @@ export function LandingPage({
           aria-label={dict.screenshots.productPreview}
         >
           <div className="product-stage-inner">
-            <div className="app-frame">
+            <FloatUp className="app-frame">
               <Image
                 src="/app.png"
                 alt={dict.screenshots.hero}
@@ -130,34 +130,34 @@ export function LandingPage({
                 sizes="(max-width: 1228px) calc(100vw - 48px), 1180px"
                 preload
               />
-            </div>
+            </FloatUp>
           </div>
         </section>
 
-        <section className="principles" aria-label={dict.principles.heading}>
+        <StaggerGroup className="principles" aria-label={dict.principles.heading}>
           {principles.map(({ icon: Icon, title, copy }) => (
-            <div className="principle" key={title}>
+            <StaggerItem className="principle" key={title}>
               <Icon aria-hidden="true" />
               <div>
                 <strong>{title}</strong>
                 <span>{copy}</span>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </section>
+        </StaggerGroup>
 
         <section
           id="capabilities"
           className="capabilities"
           aria-labelledby="capabilities-title"
         >
-          <div className="section-heading">
-            <p>{dict.capabilities.kicker}</p>
+          <Reveal className="section-heading">
+            <p className="section-kicker">{dict.capabilities.kicker}</p>
             <h2 id="capabilities-title">{dict.capabilities.heading}</h2>
-          </div>
+          </Reveal>
 
           <div className="capability-layout">
-            <div className="capability-visual app-frame">
+            <FloatUp className="capability-visual app-frame">
               <Image
                 src="/app2.png"
                 alt={dict.screenshots.workspace}
@@ -166,24 +166,24 @@ export function LandingPage({
                 className="feature-screenshot"
                 sizes="(max-width: 980px) calc(100vw - 48px), 660px"
               />
-            </div>
+            </FloatUp>
 
-            <div className="capability-list">
+            <StaggerGroup className="capability-list">
               {capabilities.map(({ icon: Icon, title, copy }) => (
-                <article className="capability" key={title}>
+                <StaggerItem as="article" className="capability" key={title}>
                   <Icon aria-hidden="true" />
                   <div>
                     <h3>{title}</h3>
                     <p>{copy}</p>
                   </div>
-                </article>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGroup>
           </div>
         </section>
 
         <section className="workflow-section" aria-labelledby="workflow-title">
-          <div className="workflow-copy">
+          <Reveal className="workflow-copy">
             <p className="workflow-kicker">{dict.workflow.kicker}</p>
             <h2 id="workflow-title">
               {dict.workflow.headingLines[0]}
@@ -198,9 +198,9 @@ export function LandingPage({
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="terminal-specimen app-frame">
+          <FloatUp className="terminal-specimen app-frame">
             <Image
               src="/app3.png"
               alt={dict.screenshots.terminal}
@@ -209,25 +209,21 @@ export function LandingPage({
               className="feature-screenshot"
               sizes="(max-width: 980px) calc(100vw - 48px), 700px"
             />
-          </div>
+          </FloatUp>
         </section>
 
-        <section
-          id="stack"
-          className="stack-section"
-          aria-label={dict.stack.heading}
-        >
+        <Reveal as="section" id="stack" className="stack-section" aria-label={dict.stack.heading}>
           <p>{dict.stack.label}</p>
           <div className="stack-list">
             {stack.map((item) => <span key={item}>{item}</span>)}
           </div>
-        </section>
+        </Reveal>
 
         <section id="faq" className="faq-section" aria-labelledby="faq-title">
-          <div className="faq-heading">
+          <Reveal className="faq-heading">
             <p>{dict.faq.kicker}</p>
             <h2 id="faq-title">{dict.faq.heading}</h2>
-          </div>
+          </Reveal>
 
           {/* Base UI's Accordion is single-open and collapsible by default;
               Radix's `type`/`collapsible` props would leak onto the DOM node. */}
@@ -246,16 +242,13 @@ export function LandingPage({
           className="download-section"
           aria-labelledby="download-title"
         >
-          <div>
-            <IconBrandWindows aria-hidden="true" />
-            <p>{dict.download.label}</p>
-          </div>
-          <h2 id="download-title">
+          <Reveal as="p" className="download-label">{dict.download.label}</Reveal>
+          <Reveal as="h2" id="download-title" delay={0.08}>
             {dict.download.headingLine1}
             <br />
             {dict.download.headingLine2}
-          </h2>
-          <div className="download-actions">
+          </Reveal>
+          <Reveal className="download-actions" delay={0.16}>
             <a
               href={GITHUB_URL}
               target="_blank"
@@ -266,7 +259,7 @@ export function LandingPage({
               <IconArrowUpRight aria-hidden="true" />
             </a>
             <span>{dict.download.note}</span>
-          </div>
+          </Reveal>
         </section>
       </main>
 
