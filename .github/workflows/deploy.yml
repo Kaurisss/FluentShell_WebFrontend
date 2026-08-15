@@ -40,7 +40,11 @@ jobs:
             echo "path=/$REPO" >> "$GITHUB_OUTPUT"
           fi
 
-      - run: npm ci
+      # `npm ci` fails on Linux: the lock file was generated on Windows, where
+      # npm skips resolving transitive deps of wasm-only optional packages
+      # (@tailwindcss/oxide-wasm32-wasi -> @emnapi/*). `npm install` fills the
+      # gap from the registry instead of hard-failing on it.
+      - run: npm install --no-fund --no-audit
 
       - run: npm run build
         env:
