@@ -14,4 +14,4 @@ export const SITE_TAGLINE = "Native SSH & SFTP for Windows";
 export const SITE_DESCRIPTION =
   "FluentShell is a free, open-source SSH and SFTP client for Windows 10 and 11. Terminal, remote file browser, and live server metrics in one native WinUI 3 window.";
 
-export const GITHUB_URL = "https://github.com/fluent-shell";
+export const GITHUB_URL = "https://github.com/Kaurisss/FluentShell";

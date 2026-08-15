@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/lib/dictionaries";
 import { LOCALES, localePath, type Locale } from "@/lib/i18n";
+import { publicPath } from "@/lib/utils";
 
 /**
  * Plain anchors rather than <Link>: switching locale must reload the document
@@ -25,7 +26,7 @@ export function LanguageSwitcher({
         return (
           <a
             key={candidate}
-            href={localePath(candidate)}
+            href={publicPath(localePath(candidate))}
             hrefLang={candidate}
             aria-current={current ? "true" : undefined}
             className={current ? "lang-option is-current" : "lang-option"}

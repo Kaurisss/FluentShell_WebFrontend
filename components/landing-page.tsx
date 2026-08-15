@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/accordion";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import type { Dictionary } from "@/lib/dictionaries";
+import { publicPath } from "@/lib/utils";
 import type { Locale } from "@/lib/i18n";
 import { GITHUB_URL } from "@/lib/site";
 import { Reveal, StaggerGroup, StaggerItem, FloatUp } from "@/components/animate";
@@ -48,7 +49,7 @@ export function LandingPage({
       <header id="top" className="site-header">
         <a href="#top" className="brand" aria-label={dict.nav.home}>
           <Image
-            src="/FluentShell.ico"
+            src={publicPath("/FluentShell.ico")}
             alt=""
             width={30}
             height={30}
@@ -122,7 +123,7 @@ export function LandingPage({
           <div className="product-stage-inner">
             <FloatUp className="app-frame">
               <Image
-                src="/app.png"
+                src={publicPath("/app.png")}
                 alt={dict.screenshots.hero}
                 width={1200}
                 height={800}
@@ -159,7 +160,7 @@ export function LandingPage({
           <div className="capability-layout">
             <FloatUp className="capability-visual app-frame">
               <Image
-                src="/app2.png"
+                src={publicPath("/app2.png")}
                 alt={dict.screenshots.workspace}
                 width={1200}
                 height={800}
@@ -202,7 +203,7 @@ export function LandingPage({
 
           <FloatUp className="terminal-specimen app-frame">
             <Image
-              src="/app3.png"
+              src={publicPath("/app3.png")}
               alt={dict.screenshots.terminal}
               width={1200}
               height={800}
@@ -265,7 +266,7 @@ export function LandingPage({
 
       <footer className="site-footer">
         <a href="#top" className="brand" aria-label={dict.nav.backToTop}>
-          <Image src="/FluentShell.ico" alt="" width={26} height={26} />
+          <Image src={publicPath("/FluentShell.ico")} alt="" width={26} height={26} />
           <span>FluentShell</span>
         </a>
         <p>{dict.footer.tagline}</p>

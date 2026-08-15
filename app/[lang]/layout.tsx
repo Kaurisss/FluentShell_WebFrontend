@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
-import { cn } from "@/lib/utils";
+import { cn, publicPath } from "@/lib/utils";
 import { getDictionary } from "@/lib/dictionaries";
 import {
   HTML_LANG,
@@ -64,7 +64,7 @@ export async function generateMetadata({
       },
     },
     icons: {
-      icon: "/FluentShell.ico",
+      icon: publicPath("/FluentShell.ico"),
     },
   };
 }
