@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/noto-sans-sc";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -38,7 +40,7 @@
   --surface-hover: oklch(0.965 0.005 264);
   --grid-line: oklch(0.42 0.03 271 / 0.03);
   --shadow-app:
-    0 0 0 1px oklch(0.16 0.02 264 / 0.06),
+    0 0 0 2px oklch(0.16 0.02 264 / 0.06),
     0 1px 2px oklch(0.16 0.02 264 / 0.04),
     0 4px 12px oklch(0.16 0.02 264 / 0.06),
     0 16px 40px oklch(0.16 0.02 264 / 0.08),
@@ -80,7 +82,7 @@
     --surface-hover: oklch(0.235 0.012 266);
     --grid-line: oklch(0.85 0.04 271 / 0.035);
     --shadow-app:
-      0 0 0 1px oklch(1 0 0 / 0.06),
+      0 0 0 2px oklch(1 0 0 / 0.06),
       0 1px 2px oklch(0 0 0 / 0.12),
       0 4px 12px oklch(0 0 0 / 0.14),
       0 16px 40px oklch(0 0 0 / 0.18),
@@ -132,9 +134,9 @@
     @apply bg-background text-foreground;
     margin: 0;
     font-family:
-      "Segoe UI Variable", "Segoe UI", system-ui, "Microsoft YaHei UI",
-      "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC",
-      sans-serif;
+      "Inter Variable", "Noto Sans SC Variable", "Segoe UI Variable",
+      "Segoe UI", system-ui, "Microsoft YaHei UI", "Microsoft YaHei",
+      "PingFang SC", "Hiragino Sans GB", sans-serif;
     font-synthesis: none;
   }
 
