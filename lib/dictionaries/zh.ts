@@ -31,16 +31,14 @@ export const zh: Dictionary = {
     names: { en: "English", zh: "中文" },
   },
   hero: {
-    releaseNote: "为 Windows 10 与 11 原生打造",
-    // Display headings carry no terminal punctuation: at 80px a full-width
-    // 。or ，leaves an em-wide hole at the end of the line.
-    titleLine1: "你的服务器",
-    titleLine2: "一个专注的工作区",
+    releaseNote: "Windows 原生体验",
+    titleLine1: "为 Windows 打造的",
+    titleLine2: "现代 SSH 客户端",
     intro:
-      "FluentShell 把 SSH、SFTP 和服务器实时状态收进同一个 Windows 原生应用——启动快、操作直接，没有浏览器时代的额外开销。",
-    ctaDownload: "下载 Windows 版",
-    ctaSource: "查看源码",
-    meta: "开源 · 无遥测 · 原生 WinUI 3",
+      "连接服务器、管理远程文件，并在一个专注的 WinUI 工作区里掌握系统状态。FluentShell 免费、开源，为 Windows 而生。",
+    ctaDownload: "从 GitHub 下载",
+    ctaSource: "探索产品能力",
+    meta: "开源 · 无遥测 · 支持 Windows 10 1809+ 与 Windows 11",
   },
   screenshots: {
     hero: "FluentShell 在同一窗口中显示 SSH 终端、SFTP 文件管理器和服务器实时指标",

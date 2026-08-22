@@ -31,14 +31,14 @@ export const en: Dictionary = {
     names: { en: "English", zh: "中文" },
   },
   hero: {
-    releaseNote: "Native for Windows 10 and 11",
-    titleLine1: "Your servers.",
-    titleLine2: "One focused workspace.",
+    releaseNote: "A native Windows experience",
+    titleLine1: "A modern SSH client",
+    titleLine2: "built for Windows.",
     intro:
-      "FluentShell brings SSH, SFTP, and live server telemetry into one native Windows application—fast to open, direct to use, and free of browser-era overhead.",
-    ctaDownload: "Download for Windows",
-    ctaSource: "View source",
-    meta: "Open source · No telemetry · Native WinUI 3",
+      "Connect to servers, manage remote files, and keep an eye on system health from one focused WinUI workspace. FluentShell is free, open source, and made for Windows.",
+    ctaDownload: "Download from GitHub",
+    ctaSource: "Explore features",
+    meta: "Open source · No telemetry · Windows 10 1809+ and Windows 11",
   },
   screenshots: {
     hero: "FluentShell showing an SSH terminal, SFTP file browser, and live server metrics in one window",
