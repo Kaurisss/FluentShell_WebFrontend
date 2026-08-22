@@ -152,7 +152,7 @@ export function LandingPage({ locale, dict }: { locale: Locale; dict: Dictionary
           </Accordion>
         </section>
 
-        <section id="download" className="download-section" aria-labelledby="download-title">
+        <section id="download" className="download-section" aria-labelledby="download-title" style={{ backgroundImage: `url(${publicPath("/cta.png")})` }}>
           <Reveal as="p" className="eyebrow">{dict.download.label}</Reveal>
           <Reveal as="h2" id="download-title" delay={0.06}>{dict.download.headingLine1}<br />{dict.download.headingLine2}</Reveal>
           <Reveal className="download-actions" delay={0.12}>
