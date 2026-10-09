@@ -9,9 +9,9 @@ export const SITE_URL = (
 
 export const SITE_NAME = "FluentShell";
 
-export const SITE_TAGLINE = "Native SSH & SFTP for Windows";
+export const SITE_TAGLINE = "Native SSH & File Management for Windows";
 
 export const SITE_DESCRIPTION =
-  "FluentShell is a free, open-source SSH and SFTP client for Windows 10 and 11. Terminal, remote file browser, and live server metrics in one native WinUI 3 window.";
+  "A free, open-source SSH, SFTP and FTP client for Windows. Multi-tab terminals, dual-pane file management, folder transfers and text editing in a native WinUI 3 interface.";
 
 export const GITHUB_URL = "https://github.com/Kaurisss/FluentShell";

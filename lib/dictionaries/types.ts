@@ -8,6 +8,11 @@ export interface FaqEntry {
   answer: string;
 }
 
+export interface ProductCopy extends FeatureCopy {
+  label: string;
+  bullets: [string, string, string];
+}
+
 /**
  * Every locale must supply this exact shape, so a missing translation is a
  * type error rather than an English string leaking into another language.
@@ -45,7 +50,7 @@ export interface Dictionary {
   screenshots: {
     hero: string;
     workspace: string;
-    terminal: string;
+    editor: string;
     productPreview: string;
   };
   principles: {
@@ -59,27 +64,24 @@ export interface Dictionary {
     heading: string;
     terminal: FeatureCopy;
     sftp: FeatureCopy;
+    transfers: FeatureCopy;
+    editor: FeatureCopy;
     metrics: FeatureCopy;
+    connections: FeatureCopy;
   };
-  workflow: {
-    kicker: string;
-    /**
-     * Explicit lines rather than one wrapping string: CJK breaks between any
-     * two characters, so the break point has to be chosen per locale to keep
-     * full-width punctuation off the end of a line.
-     */
-    headingLines: [string, string];
-    body: string;
-    bullets: [string, string, string];
+  product: {
+    files: ProductCopy;
+    editor: ProductCopy;
   };
-  stack: {
-    label: string;
+  progress: {
     heading: string;
+    body: string;
+    cta: string;
   };
   faq: {
     kicker: string;
     heading: string;
-    entries: [FaqEntry, FaqEntry, FaqEntry, FaqEntry];
+    entries: FaqEntry[];
   };
   download: {
     label: string;

@@ -2,140 +2,97 @@ import type { Dictionary } from "./types";
 
 export const en: Dictionary = {
   meta: {
-    title: "FluentShell — Native SSH & SFTP for Windows",
-    description:
-      "FluentShell is a free, open-source SSH and SFTP client for Windows 10 and 11. Terminal, remote file browser, and live server metrics in one native WinUI 3 window.",
-    keywords: [
-      "SSH client",
-      "SFTP client",
-      "Windows SSH client",
-      "WinUI 3",
-      "open source terminal",
-      "server monitoring",
-      "FluentShell",
-    ],
+    title: "FluentShell — Native SSH & File Management for Windows",
+    description: "A free, open-source SSH, SFTP and FTP client for Windows. Multi-tab terminals, dual-pane file management, folder transfers and text editing in a native WinUI 3 interface.",
+    keywords: ["SSH client", "SFTP client", "FTP client", "Windows SSH client", "WinUI 3", "remote text editor", "FluentShell"],
   },
   nav: {
     home: "FluentShell home",
     product: "Product",
-    capabilities: "Capabilities",
+    capabilities: "Features",
     faq: "FAQ",
-    github: "GitHub",
-    download: "Download",
-    primaryLabel: "Primary",
+    github: "View source on GitHub",
+    download: "Get the app",
+    primaryLabel: "Primary navigation",
     skipToContent: "Skip to content",
     backToTop: "Back to top",
   },
-  language: {
-    label: "Language",
-    names: { en: "English", zh: "中文" },
-  },
+  language: { label: "Language", names: { en: "English", zh: "中文" } },
   hero: {
-    releaseNote: "A native Windows experience",
-    titleLine1: "A modern SSH client",
-    titleLine2: "built for Windows.",
-    intro:
-      "Connect to servers, manage remote files, and keep an eye on system health from one focused WinUI workspace. FluentShell is free, open source, and made for Windows.",
-    ctaDownload: "Download from GitHub",
-    ctaSource: "Explore features",
-    meta: "Open source · No telemetry · Windows 10 1809+ and Windows 11",
+    releaseNote: "WinUI 3 · Native to Windows",
+    titleLine1: "Connect to servers.",
+    titleLine2: "Move and edit files.",
+    intro: "Multi-tab SSH, dual-pane file management and a text editor. Handle everyday server work from your Windows desktop.",
+    ctaDownload: "View GitHub releases",
+    ctaSource: "Explore the interface",
+    meta: "Free and open source · Windows 10 1809+ / Windows 11",
   },
   screenshots: {
-    hero: "FluentShell showing an SSH terminal, SFTP file browser, and live server metrics in one window",
-    workspace:
-      "FluentShell session workspace with terminal, SFTP files, and server metrics",
-    terminal: "FluentShell terminal connected to a remote server",
-    productPreview: "FluentShell product preview",
+    hero: "FluentShell SSH workspace with session tabs, Linux server metrics, a terminal and local and remote file panes",
+    workspace: "FluentShell dual-pane file manager showing local and remote directories and the file action menu",
+    editor: "FluentShell text editor with line numbers, syntax highlighting, search and save controls",
+    productPreview: "FluentShell product interface",
   },
   principles: {
-    heading: "Product principles",
-    privacy: {
-      title: "Private by default",
-      copy: "Zero telemetry and local profile storage.",
+    heading: "Interface, credentials and license",
+    native: { title: "A native Windows interface", copy: "Light, dark and system themes, with Mica and Acrylic materials." },
+    privacy: { title: "Credentials kept by Windows", copy: "Saved passwords and key passphrases go into Windows Credential Manager." },
+    openSource: { title: "Free and open source", copy: "MIT licensed, with public source code and development progress." },
+  },
+  product: {
+    files: {
+      label: "01 / File management",
+      title: "Local and remote, side by side.",
+      copy: "Browse both directories and drop local files or folders into the remote pane to upload. Folder transfers preserve their structure; the transfer center shows progress and speed.",
+      bullets: ["SFTP / FTP", "Recursive transfers and batch conflicts", "Pause, resume and retry failures"],
     },
-    native: {
-      title: "Native response",
-      copy: "Built for Windows, not wrapped for it.",
-    },
-    openSource: {
-      title: "Open source",
-      copy: "Inspect the code and shape the roadmap.",
+    editor: {
+      label: "02 / Text editing",
+      title: "Open a file. Make an edit.",
+      copy: "Open local or remote text in a separate editor to update a config or read a log. Files are checked for external changes before saving, and unsaved edits are flagged before closing.",
+      bullets: ["Syntax highlighting and search", "Save with Ctrl+S", "Preserve encoding and line endings"],
     },
   },
   capabilities: {
-    kicker: "One surface, fewer interruptions.",
-    heading: "Everything stays in context.",
-    terminal: {
-      title: "A terminal that keeps pace",
-      copy: "A responsive xterm-compatible workspace for long-running processes, dense logs, and the commands you run all day.",
-    },
-    sftp: {
-      title: "SFTP without context switching",
-      copy: "Browse, transfer, rename, and inspect remote files beside the active terminal instead of opening a second tool.",
-    },
-    metrics: {
-      title: "The server stays visible",
-      copy: "Read CPU, memory, swap, and network activity from the same session before a small issue becomes an outage.",
-    },
+    kicker: "Features",
+    heading: "Details for everyday work.",
+    terminal: { title: "Multi-tab SSH sessions", copy: "Built with xterm.js, with independent sessions to the same server. Configure the font, cursor and scrollback buffer." },
+    sftp: { title: "Dual-pane file management", copy: "Connect via SSH, standalone SFTP or FTP. SFTP file access does not require a shell account on the server." },
+    transfers: { title: "A central transfer view", copy: "Select files and folders together. Recursive transfers preserve empty directories, with progress, speed, pause and retry controls." },
+    editor: { title: "Local and remote text editing", copy: "Edit text up to 2 MB with line numbers, highlighting and search. Checks external changes before saving and rejects binary files." },
+    metrics: { title: "Linux server metrics", copy: "View CPU, memory, swap and load in your SSH session, along with the operating system, hostname and uptime." },
+    connections: { title: "Authentication and connection settings", copy: "Password or private key authentication, a single SSH jump host and host fingerprint confirmation. Set automatic reconnect attempts and intervals." },
   },
-  workflow: {
-    kicker: "Designed for the work between commands",
-    headingLines: ["Connect. Move files.", "Understand the machine."],
-    body: "FluentShell treats a remote server as one continuous workspace. Credentials remain protected by Windows, file operations stay visible, and system health is always one glance away.",
-    bullets: [
-      "Windows Credential Manager integration",
-      "Drag-and-drop remote file transfers",
-      "Live CPU, memory, and network metrics",
-    ],
-  },
-  stack: {
-    label: "Engineered with",
-    heading: "Technology stack",
+  progress: {
+    heading: "In active development",
+    body: "Features reflect the project source checked on October 10, 2026. For installation packages, check the release notes for your selected GitHub version.",
+    cta: "Follow the project",
   },
   faq: {
-    kicker: "Answers, without the fine print.",
-    heading: "Frequently asked questions",
+    kicker: "Before you start",
+    heading: "Common questions",
     entries: [
-      {
-        question: "Is FluentShell completely free?",
-        answer:
-          "Yes. FluentShell is open source and free to use. There is no paid tier, telemetry package, or feature gate.",
-      },
-      {
-        question: "How are credentials protected?",
-        answer:
-          "Connection secrets are stored through Windows Credential Manager rather than being written directly into profile files.",
-      },
-      {
-        question: "Which SSH implementation does it use?",
-        answer:
-          "FluentShell uses SSH.NET for protocol communication and the Windows App SDK with WinUI 3 for its native interface.",
-      },
-      {
-        question: "Does it support Windows 10?",
-        answer:
-          "Yes. FluentShell supports Windows 10 version 1809 and later, as well as Windows 11.",
-      },
+      { question: "Is FluentShell free?", answer: "Yes. FluentShell is free and open source under the MIT license. You can use it, inspect the source and contribute." },
+      { question: "Which Windows versions are supported?", answer: "Windows 10 version 1809 and later, and Windows 11. Current local builds and verification use x64. Check the requirements of your selected GitHub release before installing." },
+      { question: "How are passwords and private keys stored?", answer: "When you choose to save credentials, passwords and key passphrases go into Windows Credential Manager, not profile JSON. You manage the private key file; the app stores only its path. The first SSH connection asks you to confirm the host fingerprint." },
+      { question: "How do SFTP and FTP differ?", answer: "SFTP is encrypted over SSH and supports passwords, private keys and a single jump host. FTP currently supports passive mode, passwords and direct connections only, with no FTPS. FTP sends passwords and data in plaintext, so use it only on trusted networks." },
+      { question: "What can the text editor open?", answer: "Local or remote text files up to 2 MB; binary files are rejected. UTF-8 and BOM-marked UTF-16/UTF-32 are supported, with encoding and line endings preserved on save. External changes are detected before saving and block a direct overwrite." },
+      { question: "Can I download it now?", answer: "The project is still in development. Check GitHub Releases for available packages, installation steps and release notes. This site describes the current source, which may be ahead of published versions." },
     ],
   },
   download: {
-    label: "Free. Native. Open source.",
-    headingLine1: "Give every server",
-    headingLine2: "one clear window.",
-    cta: "Download on GitHub",
-    note: "Windows 10 1809+ / Windows 11",
+    label: "FluentShell · Free and open source",
+    headingLine1: "Your Windows desktop.",
+    headingLine2: "Your remote servers.",
+    cta: "View GitHub releases",
+    note: "Windows 10 1809+ / Windows 11 · MIT",
   },
-  footer: {
-    tagline: "Native SSH and SFTP for Windows.",
-    github: "GitHub",
-    faq: "FAQ",
-  },
+  footer: { tagline: "Native SSH and file management for Windows.", github: "GitHub", faq: "FAQ" },
   og: {
-    kicker: "NATIVE FOR WINDOWS 10 AND 11",
-    headlineLine1: "Your servers.",
-    headlineLine2: "One focused workspace.",
-    subtitle:
-      "SSH, SFTP, and live server telemetry in one native Windows application.",
-    meta: "Open source · No telemetry · WinUI 3",
+    kicker: "NATIVE TO WINDOWS · WINUI 3",
+    headlineLine1: "Connect to servers.",
+    headlineLine2: "Transfer and edit files.",
+    subtitle: "SSH terminals, dual-pane files and a text editor.",
+    meta: "Free and open source · MIT · WinUI 3",
   },
 };

@@ -2,138 +2,97 @@ import type { Dictionary } from "./types";
 
 export const zh: Dictionary = {
   meta: {
-    title: "FluentShell — Windows 原生 SSH 与 SFTP 客户端",
-    description:
-      "FluentShell 是面向 Windows 10 和 11 的免费开源 SSH / SFTP 客户端。终端、远程文件管理和服务器实时状态，都在同一个原生 WinUI 3 窗口里。",
-    keywords: [
-      "SSH 客户端",
-      "SFTP 客户端",
-      "Windows SSH 工具",
-      "WinUI 3",
-      "开源终端",
-      "服务器监控",
-      "FluentShell",
-    ],
+    title: "FluentShell — Windows 原生 SSH 与文件管理",
+    description: "免费开源的 Windows SSH、SFTP 与 FTP 客户端。多标签终端、双栏文件管理、目录传输和文本编辑，采用原生 WinUI 3 界面。",
+    keywords: ["SSH 客户端", "SFTP 客户端", "FTP 客户端", "Windows SSH 工具", "WinUI 3", "远程文件编辑", "FluentShell"],
   },
   nav: {
     home: "FluentShell 首页",
     product: "产品",
-    capabilities: "能力",
+    capabilities: "功能",
     faq: "常见问题",
-    github: "GitHub",
-    download: "下载",
+    github: "查看 GitHub 源码",
+    download: "获取应用",
     primaryLabel: "主导航",
     skipToContent: "跳到主要内容",
     backToTop: "回到顶部",
   },
-  language: {
-    label: "语言",
-    names: { en: "English", zh: "中文" },
-  },
+  language: { label: "语言", names: { en: "English", zh: "中文" } },
   hero: {
-    releaseNote: "Windows 原生体验",
-    titleLine1: "为 Windows 打造的",
-    titleLine2: "现代 SSH 客户端",
-    intro:
-      "连接服务器、管理远程文件，并在一个专注的 WinUI 工作区里掌握系统状态。FluentShell 免费、开源，为 Windows 而生。",
-    ctaDownload: "从 GitHub 下载",
-    ctaSource: "探索产品能力",
-    meta: "开源 · 无遥测 · 支持 Windows 10 1809+ 与 Windows 11",
+    releaseNote: "WinUI 3 · Windows 原生客户端",
+    titleLine1: "连接远程服务器",
+    titleLine2: "传输与编辑文件",
+    intro: "多标签 SSH 终端、双栏文件管理与文本编辑。在 Windows 上，处理服务器的日常工作。",
+    ctaDownload: "查看 GitHub 版本",
+    ctaSource: "浏览产品界面",
+    meta: "免费开源 · Windows 10 1809+ / Windows 11",
   },
   screenshots: {
-    hero: "FluentShell 在同一窗口中显示 SSH 终端、SFTP 文件管理器和服务器实时指标",
-    workspace: "FluentShell 会话工作区，包含终端、SFTP 文件列表和服务器指标",
-    terminal: "FluentShell 终端已连接到远程服务器",
-    productPreview: "FluentShell 产品预览",
+    hero: "FluentShell 新版 SSH 工作区，包含会话标签、Linux 服务器指标、终端和本地远程双栏文件管理",
+    workspace: "FluentShell 新版双栏文件管理器，显示本地与远程目录及文件操作菜单",
+    editor: "FluentShell 文本编辑器，显示行号、语法高亮、查找与保存工具栏",
+    productPreview: "FluentShell 产品界面",
   },
   principles: {
-    heading: "产品理念",
-    privacy: {
-      title: "默认隐私",
-      copy: "零遥测，配置全部保存在本地。",
+    heading: "界面、凭据与开源许可",
+    native: { title: "原生 Windows 界面", copy: "浅色、深色与系统主题，支持云母和亚克力材质。" },
+    privacy: { title: "凭据由 Windows 保管", copy: "保存的密码与私钥口令交给 Windows 凭据管理器。" },
+    openSource: { title: "免费与开源", copy: "采用 MIT 许可，源码与开发进展公开。" },
+  },
+  product: {
+    files: {
+      label: "01 / 文件管理",
+      title: "本地与远程，并排管理",
+      copy: "两侧浏览目录，把本地文件或文件夹拖到远程面板上传。整目录上传与下载保留结构，传输中心集中显示进度和速度。",
+      bullets: ["SFTP / FTP", "递归传输与批量冲突处理", "暂停、继续与失败重试"],
     },
-    native: {
-      title: "原生响应",
-      copy: "为 Windows 而写，不是套壳而来。",
-    },
-    openSource: {
-      title: "开源",
-      copy: "代码可查，路线图可参与。",
+    editor: {
+      label: "02 / 文本编辑",
+      title: "查看文本，直接编辑",
+      copy: "从文件面板打开本地或远程文本，在独立窗口里修改配置、查看日志。保存前检查外部修改，关闭时提醒未保存的更改。",
+      bullets: ["语法高亮与查找", "Ctrl+S 保存", "保留编码与换行方式"],
     },
   },
   capabilities: {
-    kicker: "一个界面，更少打断",
-    heading: "所有信息都在手边",
-    terminal: {
-      title: "跟得上手速的终端",
-      copy: "兼容 xterm 的终端工作区，长时间运行的任务、密集日志和每天要敲的命令都跟得上。",
-    },
-    sftp: {
-      title: "不用切窗口的 SFTP",
-      copy: "在终端旁边浏览、传输、重命名和查看远程文件，不必再开第二个工具。",
-    },
-    metrics: {
-      title: "服务器状态一直可见",
-      copy: "在同一个会话里读取 CPU、内存、Swap 和网络活动，小问题变成故障之前就能发现。",
-    },
+    kicker: "功能概览",
+    heading: "日常操作，也照顾细节",
+    terminal: { title: "多标签 SSH 会话", copy: "基于 xterm.js，支持同一台服务器的独立会话。可设置字体、光标和滚动缓冲区。" },
+    sftp: { title: "双栏文件管理", copy: "支持 SSH、独立 SFTP 和 FTP 连接。SFTP 文件连接无需服务器提供 Shell 权限。" },
+    transfers: { title: "集中传输中心", copy: "文件与文件夹可混选，目录递归传输保留空目录。进度、速度、暂停和失败重试集中查看。" },
+    editor: { title: "本地与远程文本编辑", copy: "支持 2 MB 以内的文本、行号、语法高亮与查找。保存前检测外部修改，不打开二进制文件。" },
+    metrics: { title: "Linux 服务器指标", copy: "在 SSH 会话中查看 CPU、内存、Swap 与负载，同时显示系统、主机名和运行时间。" },
+    connections: { title: "认证与连接设置", copy: "密码或私钥认证，支持单级 SSH 跳板与主机指纹确认。自动重连的次数和间隔可设置。" },
   },
-  workflow: {
-    kicker: "为命令之间的那些事而设计",
-    headingLines: ["连接、传文件", "看懂这台机器"],
-    body: "FluentShell 把远程服务器当作一个连续的工作区：凭据交给 Windows 保管，文件操作全程可见，系统健康状况随时一眼可知。",
-    bullets: [
-      "接入 Windows 凭据管理器",
-      "拖放式远程文件传输",
-      "CPU、内存与网络实时指标",
-    ],
-  },
-  stack: {
-    label: "构建于",
-    heading: "技术栈",
+  progress: {
+    heading: "持续开发中",
+    body: "功能说明按 2026 年 10 月 10 日的项目源码核对；安装包支持的功能以 GitHub 对应版本的发布说明为准。",
+    cta: "跟进项目进展",
   },
   faq: {
-    kicker: "答案在这里，没有附加条款",
+    kicker: "使用之前",
     heading: "常见问题",
     entries: [
-      {
-        question: "FluentShell 完全免费吗？",
-        answer:
-          "是。FluentShell 开源且免费使用，没有付费版本、遥测套餐，也没有功能限制。",
-      },
-      {
-        question: "凭据是怎么保护的？",
-        answer:
-          "连接密钥通过 Windows 凭据管理器保存，不会直接写进配置文件。",
-      },
-      {
-        question: "使用的是哪个 SSH 实现？",
-        answer:
-          "协议通信使用 SSH.NET，原生界面使用 Windows App SDK 与 WinUI 3。",
-      },
-      {
-        question: "支持 Windows 10 吗？",
-        answer:
-          "支持。FluentShell 支持 Windows 10 1809 及以上版本，也支持 Windows 11。",
-      },
+      { question: "FluentShell 免费吗？", answer: "免费。FluentShell 以 MIT 许可开源，可以使用、查看源码和参与开发。" },
+      { question: "支持哪些 Windows 版本？", answer: "支持 Windows 10 1809 及以上版本和 Windows 11。当前本地构建与验证使用 x64，安装前请查看所选 GitHub 版本的要求。" },
+      { question: "密码和私钥如何保存？", answer: "选择保存凭据后，密码和私钥口令存入 Windows 凭据管理器，不写入服务器配置 JSON。私钥文件由你管理，应用只记录路径；首次 SSH 连接会要求确认主机指纹。" },
+      { question: "SFTP 和 FTP 有什么区别？", answer: "SFTP 使用 SSH 加密，支持密码、私钥和单级跳板连接。FTP 当前仅支持被动模式、密码认证和直连，不支持 FTPS；密码与数据明文传输，仅适合可信网络。" },
+      { question: "文本编辑器有什么限制？", answer: "支持 2 MB 以内的本地或远程文本文件，不打开二进制文件。支持 UTF-8，以及带 BOM 的 UTF-16/UTF-32，保存时保留编码和换行方式。若检测到外部修改，会提示并阻止直接覆盖。" },
+      { question: "现在可以下载使用吗？", answer: "项目仍在开发。请到 GitHub Releases 查看可用安装包、安装方式与发布说明；官网展示当前源码的功能，可能领先于已发布版本。" },
     ],
   },
   download: {
-    label: "免费 · 原生 · 开源",
-    headingLine1: "给每台服务器",
-    headingLine2: "一个清晰的窗口",
-    cta: "在 GitHub 下载",
-    note: "Windows 10 1809+ / Windows 11",
+    label: "FluentShell · 免费开源",
+    headingLine1: "在 Windows 上",
+    headingLine2: "管理远程服务器",
+    cta: "查看 GitHub 版本",
+    note: "Windows 10 1809+ / Windows 11 · MIT",
   },
-  footer: {
-    tagline: "Windows 上的原生 SSH 与 SFTP",
-    github: "GitHub",
-    faq: "常见问题",
-  },
+  footer: { tagline: "Windows 原生 SSH 与文件管理", github: "GitHub", faq: "常见问题" },
   og: {
-    kicker: "为 WINDOWS 10 与 11 原生打造",
-    headlineLine1: "你的服务器",
-    headlineLine2: "一个专注的工作区",
-    subtitle: "SSH、SFTP 与服务器实时状态，同在一个 Windows 原生应用里",
-    meta: "开源 · 无遥测 · WinUI 3",
+    kicker: "WINDOWS 原生 · WINUI 3",
+    headlineLine1: "连接远程服务器",
+    headlineLine2: "传输与编辑文件",
+    subtitle: "SSH 终端、双栏文件管理与文本编辑",
+    meta: "免费开源 · MIT · WinUI 3",
   },
 };

@@ -50,6 +50,22 @@ node scripts/build-og-fonts.mjs
 
 Skipping this renders unseen characters as blank boxes in the shared card.
 
+## Product imagery and copy
+
+The product stages use the supplied screenshots at their original aspect ratios:
+`public/SSH.png`, `public/SFTP.png` and `public/Editor.png`. All three share
+`public/bg.jpg` as their wallpaper. CSS blurs only the separate wallpaper layer;
+the screenshots remain sharp. Keep original assets when updating the imagery.
+
+Outside the product image stages, use only the three interface colors in
+`app/globals.css`: cool gray `#f3f4f6`, ink `#24272f` and gray `#646975`.
+Separate sections with space and typography; do not add dividers or card shadows.
+
+Chinese and English product copy is in `lib/dictionaries/`. It was checked against
+the FluentShell source on October 10, 2026, with Gemini 3.1 Pro through local
+Antigravity used for copy suggestions. Recheck feature claims against source when
+updating it; source functionality may be ahead of published installation packages.
+
 ## Checks
 
 ```bash

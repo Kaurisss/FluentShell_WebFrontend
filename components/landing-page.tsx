@@ -1,49 +1,62 @@
 import Image from "next/image";
-import {
-  IconActivity,
-  IconArrowUpRight,
-  IconBrandGithub,
-  IconBrandWindows,
-  IconCheck,
-  IconFiles,
-  IconLock,
-  IconTerminal2,
-} from "@tabler/icons-react";
+import { IconArrowUpRight, IconBrandGithub } from "@tabler/icons-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { Reveal, StaggerGroup, StaggerItem, FloatUp } from "@/components/animate";
 import type { Dictionary } from "@/lib/dictionaries";
-import { publicPath } from "@/lib/utils";
 import type { Locale } from "@/lib/i18n";
 import { GITHUB_URL } from "@/lib/site";
-import { Reveal, StaggerGroup, StaggerItem, FloatUp } from "@/components/animate";
+import { publicPath } from "@/lib/utils";
 
 const releaseUrl = `${GITHUB_URL}/releases`;
 
+function Wallpaper({ hero = false }: { hero?: boolean }) {
+  return (
+    <div className="scene-ambient" aria-hidden="true">
+      <Image src={publicPath("/bg.jpg")} alt="" fill loading={hero ? "eager" : "lazy"} sizes="(max-width: 1288px) 100vw, 1240px" />
+    </div>
+  );
+}
+
+function ProductImage({ src, alt, width, hero = false }: { src: string; alt: string; width: number; hero?: boolean }) {
+  return (
+    <div className="window-wrap">
+      <Image
+        src={publicPath(src)}
+        alt={alt}
+        width={width}
+        height={1600}
+        className="product-image"
+        preload={hero}
+        sizes={src === "/Editor.png" ? "(max-width: 900px) 84vw, 860px" : "(max-width: 900px) 88vw, 1080px"}
+      />
+    </div>
+  );
+}
+
 export function LandingPage({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const capabilities = [
-    { icon: IconTerminal2, key: "01", ...dict.capabilities.terminal },
-    { icon: IconFiles, key: "02", ...dict.capabilities.sftp },
-    { icon: IconActivity, key: "03", ...dict.capabilities.metrics },
+    dict.capabilities.terminal,
+    dict.capabilities.sftp,
+    dict.capabilities.transfers,
+    dict.capabilities.editor,
+    dict.capabilities.metrics,
+    dict.capabilities.connections,
   ];
-
   const principles = [
-    { icon: IconLock, ...dict.principles.privacy },
-    { icon: IconBrandWindows, ...dict.principles.native },
-    { icon: IconBrandGithub, ...dict.principles.openSource },
+    dict.principles.native,
+    dict.principles.privacy,
+    dict.principles.openSource,
   ];
-
   const scenes = [
-    { id: "terminal", image: "/app3.png", background: "/bg3.png", label: dict.capabilities.terminal.title, copy: dict.capabilities.terminal.copy, alt: dict.screenshots.terminal },
-    { id: "files", image: "/app2.png", background: "/bg1.png", label: dict.capabilities.sftp.title, copy: dict.capabilities.sftp.copy, alt: dict.screenshots.workspace },
-    { id: "metrics", image: "/app.png", background: "/bg.png", label: dict.capabilities.metrics.title, copy: dict.capabilities.metrics.copy, alt: dict.screenshots.hero },
+    { id: "files", image: "/SFTP.png", width: 2831, alt: dict.screenshots.workspace, ...dict.product.files },
+    { id: "editor", image: "/Editor.png", width: 2134, alt: dict.screenshots.editor, ...dict.product.editor },
   ];
 
   return (
     <div className="site-shell">
-      <a className="skip-link" href="#main">{dict.nav.skipToContent}</a>
       <header id="top" className="site-header">
         <a href="#top" className="brand" aria-label={dict.nav.home}>
-          <Image src={publicPath("/FluentShell.ico")} alt="" width={28} height={28} className="brand-mark" />
           <span>FluentShell</span>
         </a>
         <nav className="site-nav" aria-label={dict.nav.primaryLabel}>
@@ -53,11 +66,11 @@ export function LandingPage({ locale, dict }: { locale: Locale; dict: Dictionary
         </nav>
         <div className="header-actions">
           <LanguageSwitcher locale={locale} dict={dict} />
-          <a className="header-github" href={GITHUB_URL} target="_blank" rel="noreferrer">
-            {dict.nav.github}<IconArrowUpRight aria-hidden="true" />
+          <a className="header-github" href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label={dict.nav.github}>
+            <IconBrandGithub aria-hidden="true" />
           </a>
           <a className="button button-primary button-compact" href={releaseUrl} target="_blank" rel="noreferrer">
-            {dict.nav.download}
+            {dict.nav.download}<IconArrowUpRight aria-hidden="true" />
           </a>
         </div>
       </header>
@@ -65,31 +78,53 @@ export function LandingPage({ locale, dict }: { locale: Locale; dict: Dictionary
       <main id="main">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <Reveal as="p" className="eyebrow"><span className="eyebrow-dot" />{dict.hero.releaseNote}</Reveal>
-            <Reveal as="h1" id="hero-title" delay={0.06}>{dict.hero.titleLine1}<br />{dict.hero.titleLine2}</Reveal>
-            <Reveal as="p" className="hero-intro" delay={0.12}>{dict.hero.intro}</Reveal>
-            <Reveal className="hero-actions" delay={0.18}>
-              <a className="button button-primary" href={releaseUrl} target="_blank" rel="noreferrer">
-                <IconBrandGithub aria-hidden="true" />{dict.hero.ctaDownload}<IconArrowUpRight aria-hidden="true" />
-              </a>
-              <a className="text-link" href="#features">{dict.hero.ctaSource}<span aria-hidden="true">↓</span></a>
+            <div className="hero-heading">
+              <Reveal as="p" className="eyebrow">{dict.hero.releaseNote}</Reveal>
+              <Reveal as="h1" id="hero-title" delay={0.06}>{dict.hero.titleLine1}<br />{dict.hero.titleLine2}</Reveal>
+            </div>
+            <Reveal className="hero-summary" delay={0.12}>
+              <p className="hero-intro">{dict.hero.intro}</p>
+              <div className="hero-actions">
+                <a className="button button-primary" href={releaseUrl} target="_blank" rel="noreferrer">
+                  {dict.hero.ctaDownload}<IconArrowUpRight aria-hidden="true" />
+                </a>
+                <a className="text-link" href="#product">{dict.hero.ctaSource}<span aria-hidden="true">↓</span></a>
+              </div>
+              <p className="hero-meta">{dict.hero.meta}</p>
             </Reveal>
-            <Reveal as="p" className="hero-meta" delay={0.24}><IconCheck aria-hidden="true" />{dict.hero.meta}</Reveal>
           </div>
           <FloatUp className="hero-product scene scene-hero">
-            <div className="scene-ambient hero-ambient" aria-hidden="true" style={{ backgroundImage: `url(${publicPath("/hero_bg.png")})` }} />
-            <div className="window-wrap">
-              <Image src={publicPath("/app.png")} alt={dict.screenshots.hero} width={1400} height={900} className="product-image" priority sizes="(max-width: 900px) calc(100vw - 32px), 1120px" />
-            </div>
+            <Wallpaper hero />
+            <ProductImage src="/SSH.png" alt={dict.screenshots.hero} width={2799} hero />
           </FloatUp>
         </section>
 
         <section className="principles" aria-label={dict.principles.heading}>
-          {principles.map(({ icon: Icon, title, copy }) => (
+          {principles.map(({ title, copy }) => (
             <Reveal as="article" className="principle" key={title}>
-              <Icon aria-hidden="true" />
-              <div><strong>{title}</strong><span>{copy}</span></div>
+              <div><h2>{title}</h2><p>{copy}</p></div>
             </Reveal>
+          ))}
+        </section>
+
+        <section id="product" className="scenes" aria-label={dict.screenshots.productPreview}>
+          {scenes.map((scene) => (
+            <article className={`scene-row scene-row-${scene.id}`} key={scene.id} aria-labelledby={`${scene.id}-title`}>
+              <Reveal className="scene-heading">
+                <div>
+                  <p className="eyebrow">{scene.label}</p>
+                  <h2 id={`${scene.id}-title`}>{scene.title}</h2>
+                </div>
+                <div className="scene-copy">
+                  <p>{scene.copy}</p>
+                  <ul>{scene.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+                </div>
+              </Reveal>
+              <Reveal className={`scene scene-${scene.id}`}>
+                <Wallpaper />
+                <ProductImage src={scene.image} alt={scene.alt} width={scene.width} />
+              </Reveal>
+            </article>
           ))}
         </section>
 
@@ -99,49 +134,16 @@ export function LandingPage({ locale, dict }: { locale: Locale; dict: Dictionary
             <h2 id="features-title">{dict.capabilities.heading}</h2>
           </Reveal>
           <StaggerGroup className="capability-list">
-            {capabilities.map(({ icon: Icon, key, title, copy }) => (
+            {capabilities.map(({ title, copy }, index) => (
               <StaggerItem as="article" className="capability" key={title}>
-                <span className="capability-index">{key}</span>
-                <Icon aria-hidden="true" />
+                <span className="capability-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 <div><h3>{title}</h3><p>{copy}</p></div>
               </StaggerItem>
             ))}
           </StaggerGroup>
-        </section>
-
-        <section id="product" className="scenes" aria-label={dict.screenshots.productPreview}>
-          {scenes.map((scene, index) => (
-            <article className={`scene-row scene-row-${index % 2 === 0 ? "image-first" : "copy-first"}`} key={scene.id}>
-              <Reveal className={`scene scene-${scene.id}`}>
-                <div
-                  className="scene-ambient"
-                  aria-hidden="true"
-                  style={{ backgroundImage: `url(${publicPath(scene.background)})` }}
-                />
-                <div className="window-wrap">
-                  <Image src={publicPath(scene.image)} alt={scene.alt} width={1200} height={800} className="product-image" sizes="(max-width: 900px) calc(100vw - 32px), 720px" />
-                </div>
-              </Reveal>
-              <Reveal className="scene-copy" delay={0.06}>
-                <p className="scene-number">0{index + 1} / {dict.nav.capabilities}</p>
-                <h2>{scene.label}</h2>
-                <p>{scene.copy}</p>
-              </Reveal>
-            </article>
-          ))}
-        </section>
-
-        <section className="trust-section" aria-labelledby="trust-title">
-          <Reveal className="trust-copy">
-            <p className="eyebrow">{dict.workflow.kicker}</p>
-            <h2 id="trust-title">{dict.workflow.headingLines[0]}<br />{dict.workflow.headingLines[1]}</h2>
-            <p>{dict.workflow.body}</p>
-            <ul>{dict.workflow.bullets.map((bullet) => <li key={bullet}><IconCheck aria-hidden="true" />{bullet}</li>)}</ul>
-          </Reveal>
-          <Reveal className="trust-facts" delay={0.08}>
-            <div><span>WinUI 3</span><strong>{dict.principles.native.title}</strong><p>{dict.principles.native.copy}</p></div>
-            <div><span>Windows 10 1809+</span><strong>Windows 11</strong><p>{dict.download.note}</p></div>
-            <div><span>Open source</span><strong>Zero telemetry</strong><p>{dict.principles.privacy.copy}</p></div>
+          <Reveal className="project-note">
+            <div><h3>{dict.progress.heading}</h3><p>{dict.progress.body}</p></div>
+            <a className="text-link" href={GITHUB_URL} target="_blank" rel="noreferrer">{dict.progress.cta}<IconArrowUpRight aria-hidden="true" /></a>
           </Reveal>
         </section>
 
@@ -152,18 +154,18 @@ export function LandingPage({ locale, dict }: { locale: Locale; dict: Dictionary
           </Accordion>
         </section>
 
-        <section id="download" className="download-section" aria-labelledby="download-title" style={{ backgroundImage: `url(${publicPath("/cta.png")})` }}>
+        <section id="download" className="download-section" aria-labelledby="download-title">
           <Reveal as="p" className="eyebrow">{dict.download.label}</Reveal>
           <Reveal as="h2" id="download-title" delay={0.06}>{dict.download.headingLine1}<br />{dict.download.headingLine2}</Reveal>
           <Reveal className="download-actions" delay={0.12}>
-            <a className="button button-on-blue" href={releaseUrl} target="_blank" rel="noreferrer">{dict.download.cta}<IconArrowUpRight aria-hidden="true" /></a>
+            <a className="button button-primary" href={releaseUrl} target="_blank" rel="noreferrer">{dict.download.cta}<IconArrowUpRight aria-hidden="true" /></a>
             <span>{dict.download.note}</span>
           </Reveal>
         </section>
       </main>
 
       <footer className="site-footer">
-        <a href="#top" className="brand" aria-label={dict.nav.backToTop}><Image src={publicPath("/FluentShell.ico")} alt="" width={26} height={26} /><span>FluentShell</span></a>
+        <a href="#top" className="brand" aria-label={dict.nav.backToTop}><span>FluentShell</span></a>
         <p>{dict.footer.tagline}</p>
         <div><LanguageSwitcher locale={locale} dict={dict} /><a href={GITHUB_URL} target="_blank" rel="noreferrer">{dict.footer.github}</a><a href="#faq">{dict.footer.faq}</a><span>© {new Date().getFullYear()}</span></div>
       </footer>
