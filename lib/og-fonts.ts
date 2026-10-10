@@ -1,6 +1,5 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import type { Locale } from "@/lib/i18n";
 
 type OgFont = {
   name: string;
@@ -17,15 +16,13 @@ const CJK_FILES = [
 ];
 
 /**
- * Satori ships Latin glyphs only. Chinese cards get the vendored Noto Sans SC
- * subset (see scripts/build-og-fonts.mjs); English keeps the built-in font.
+ * Use the vendored Noto Sans SC subset for both locales so Latin and Chinese
+ * cards share the same regular and bold weights (see scripts/build-og-fonts.mjs).
  *
  * Read from disk rather than imported so the font bytes stay out of the route
  * bundle. Static generation runs at build time, so the files are always local.
  */
-export async function loadOgFonts(locale: Locale): Promise<OgFont[] | undefined> {
-  if (locale !== "zh") return undefined;
-
+export async function loadOgFonts(): Promise<OgFont[]> {
   const fonts = await Promise.all(
     CJK_FILES.map(async ({ file, weight }) => {
       const buffer = await readFile(path.join(FONT_DIR, file));

@@ -91,8 +91,8 @@ export const en: Dictionary = {
   og: {
     kicker: "NATIVE TO WINDOWS · WINUI 3",
     headlineLine1: "Connect to servers.",
-    headlineLine2: "Transfer and edit files.",
-    subtitle: "SSH terminals, dual-pane files and a text editor.",
+    headlineLine2: "Move and edit files.",
+    subtitle: "SSH, file transfers and text editing.",
     meta: "Free and open source · MIT · WinUI 3",
   },
 };
